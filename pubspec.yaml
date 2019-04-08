@@ -1,0 +1,23 @@
+name: rise
+description: The complete RISE Dart library which includes the Dart versions of the module 'dpos-offline' for offline signing and verifying transactions and the module 'rise api' for sending transactions and other requests to Rise nodes.
+author: Vergill Lemmert <vergill.dev@gmail.com>
+homepage: https://github.com/VergillR/rise-dart
+
+version: 1.0.0
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^2.1.0
+  hex: ^0.1.2
+  fixnum: ^0.10.9
+  pointycastle: ^1.0.1
+  flutter_sodium: ^0.0.9
+  raw: ^0.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
