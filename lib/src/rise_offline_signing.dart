@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:meta/meta.dart';
-import 'package:pointycastle/pointycastle.dart';
+import 'package:pointycastle/pointycastle.dart' show Digest;
 import 'package:flutter_sodium/flutter_sodium.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:hex/hex.dart';
