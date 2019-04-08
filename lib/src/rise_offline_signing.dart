@@ -121,8 +121,16 @@ class RiseOfflineSigning {
         givenPublicKey is String ? HEX.decode(givenPublicKey) : givenPublicKey);
   }
 
-  Future<Map<String, Uint8List>> deriveKeypair(Uint8List seed) {
-    return Sodium.cryptoSignSeedKeypair(seed)
+  Future<Map<String, Uint8List>> deriveKeypair(dynamic seed) {
+    Uint8List s;
+    if (seed is String) {
+      Digest sha256 = new Digest('SHA-256');
+      s = sha256.process(utf8.encode(seed));
+    } else {
+      s = seed;
+    }
+
+    return Sodium.cryptoSignSeedKeypair(s)
         .then((res) => {'sk': res['sk'], 'pk': res['pk']})
         .catchError((err) {
       throw err;
