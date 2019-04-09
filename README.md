@@ -38,10 +38,12 @@ Deprecated functions are not available.
 print(Rise.api.getNodeAddress());
 
 Map<String, dynamic> query = {'type': 2, 'fromHeight': 1871470};
-Rise.api.transactions.getList(query).then((res) => print(res)).catchError((err) => print(err));
-Rise.api.transactions.count().then((res) => print(res)).catchError((err) => print(err));
-Rise.api.accounts.getPublicKey('3917106276365326430R').then((res) => print(res)).catchError((err) => print(err));
-Rise.api.blocks.getBlock('10576897963853633953').then((res) => print(res)).catchError((err) => print(err));
+var res1 = await Rise.api.transactions.getList(query);
+print(res1);
+var res2 = await Rise.api.accounts.getPublicKey('3917106276365326430R');
+print(res2);
+var res3 = await Rise.api.blocks.getBlock('10576897963853633953');
+print(res3);
 
 // post a fully signed transaction
 var sendTx = await Rise.offline.createSignedAndPostableTransaction(transaction: transaction, firstKeypair: keypair1, secondKeypair: keypair2);
