@@ -25,7 +25,7 @@ var transaction = {
 };
 // one convenience method produces a fully signed transaction object ready to be posted to the RISE network
 // note: all individual functions (e.g. calcSignature, toPostable, toBytes, getTransactionId (identifier), etc.) are still available for use
-var sendTx = Rise.offline.createSignedAndPostableTransaction(transaction: transaction, firstKeypair: keypair1, secondKeypair: keypair2);
+var sendTx = await Rise.offline.createSignedAndPostableTransaction(transaction: transaction, firstKeypair: keypair1, secondKeypair: keypair2);
 print(sendTx);
 ```
 
@@ -44,7 +44,7 @@ Rise.api.accounts.getPublicKey('3917106276365326430R').then((res) => print(res))
 Rise.api.blocks.getBlock('10576897963853633953').then((res) => print(res)).catchError((err) => print(err));
 
 // post a fully signed transaction
-var sendTx = Rise.offline.createSignedAndPostableTransaction(transaction: transaction, firstKeypair: keypair1, secondKeypair: keypair2);
+var sendTx = await Rise.offline.createSignedAndPostableTransaction(transaction: transaction, firstKeypair: keypair1, secondKeypair: keypair2);
 Rise.api.transactions.put(sendTx).then((res) => print(res)).catchError((err) => print(err));
 ```
 
