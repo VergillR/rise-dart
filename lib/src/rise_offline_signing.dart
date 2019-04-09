@@ -7,6 +7,7 @@ import 'package:fixnum/fixnum.dart';
 import 'package:hex/hex.dart';
 import 'package:raw/raw.dart';
 import './utils/BigInt.dart';
+import 'package:bip39/bip39.dart' as bip39;
 
 /// Includes RISE offline crypto functions (based on https://github.com/vekexasia/dpos-offline/):
 /// deriving a keypair, signing and verifying messages and transactions, transforming transactions, calculating addresses and transaction id's
@@ -58,6 +59,10 @@ class RiseOfflineSigning {
   };
 
   RiseOfflineSigning();
+
+  String generateMnemonic() => bip39.generateMnemonic();
+
+  bool validateMnemonic(String mnemonic) => bip39.validateMnemonic(mnemonic);
 
   Map<String, dynamic> getBaseTransactionObject({int version = 1}) {
     return version == 1
