@@ -9,13 +9,16 @@ Includes all functions from [dpos-offline](https://github.com/vekexasia/dpos-off
 
 // create account
 var mnemonic1 = Rise.offline.generateMnemonic();
-var mnemonic2 = Rise.offline.generateMnemonic();
+print(mnemonic1); // first passphrase
 var keypair1 = await Rise.offline.deriveKeypair(mnemonic1);
-var keypair2 = await Rise.offline.deriveKeypair(mnemonic2);
 print(keypair1['sk']); // output first private key
 print(keypair1['pk']); // output first public key
 var address = Rise.offline.calcAddress(keypair1['pk']);
 print(address); // output address
+
+// if there is a second passphrase registered for the account
+// var mnemonic2 = 'Your second passphrase';
+// var keypair2 = await Rise.offline.deriveKeypair(mnemonic2);
 
 // create transaction
 var transaction = {
@@ -23,9 +26,12 @@ var transaction = {
   'amount': 100000000,
   'recipient': '12345678901234567R'
 };
-// one convenience method produces a fully signed transaction object ready to be posted to the RISE network
+
+// get a fully signed transaction object ready to be posted to the RISE network
 // note: all individual functions (e.g. calcSignature, toPostable, toBytes, getTransactionId (identifier), etc.) are still available for use
-var sendTx = await Rise.offline.createSignedAndPostableTransaction(transaction: transaction, firstKeypair: keypair1, secondKeypair: keypair2);
+var sendTx = await Rise.offline.createSignedAndPostableTransaction(transaction: transaction, firstKeypair: keypair1);
+// if there is a second passphrase registered for the account
+// var sendTx = await Rise.offline.createSignedAndPostableTransaction(transaction: transaction, firstKeypair: keypair1, secondKeypair: keypair2);
 print(sendTx);
 ```
 
@@ -47,7 +53,8 @@ print(res3);
 
 // post a fully signed transaction
 var sendTx = await Rise.offline.createSignedAndPostableTransaction(transaction: transaction, firstKeypair: keypair1, secondKeypair: keypair2);
-Rise.api.transactions.put(sendTx).then((res) => print(res)).catchError((err) => print(err));
+var res = await Rise.api.transactions.put(sendTx);
+print(res);
 ```
 
 ## License
