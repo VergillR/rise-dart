@@ -45,16 +45,16 @@ print(Rise.api.getNodeAddress());
 
 Map<String, dynamic> query = {'type': 2, 'fromHeight': 1871470};
 var res1 = await Rise.api.transactions.getList(query);
-print(res1);
+print(res1.data);
 var res2 = await Rise.api.accounts.getPublicKey('3917106276365326430R');
-print(res2);
+print(res2.data);
 var res3 = await Rise.api.blocks.getBlock('10576897963853633953');
-print(res3);
+print(res3.data);
 
 // post a fully signed transaction
 var sendTx = await Rise.offline.createSignedAndPostableTransaction(transaction: transaction, firstKeypair: keypair1, secondKeypair: keypair2);
 var res = await Rise.api.transactions.put(sendTx);
-print(res);
+print(res.data);
 ```
 
 ## License
