@@ -12,6 +12,7 @@ import './api/transactions.dart';
 
 class RiseWebApi {
   static const _PATH_SUFFIX = 'api';
+  String nodeAddress = 'https://twallet.rise.vision/';
   var _dio = Dio();
 
   Accounts accounts;
@@ -23,10 +24,9 @@ class RiseWebApi {
   Signatures signatures;
   Transactions transactions;
 
-  RiseWebApi({String nodeAddress = 'https://twallet.rise.vision/'}) {
-    var path = nodeAddress.endsWith('/') ? nodeAddress : nodeAddress + '/';
-    _dio.options.baseUrl =
-        path.endsWith('/$_PATH_SUFFIX/') ? path : path + '$_PATH_SUFFIX/';
+  RiseWebApi() {
+    nodeAddress = nodeAddress.endsWith('/') ? nodeAddress : nodeAddress + '/';
+    _dio.options.baseUrl = nodeAddress + '$_PATH_SUFFIX/';
     _dio.options.connectTimeout = 4000;
     _dio.options.contentType = ContentType.json;
     this.accounts = Accounts(callback);
@@ -53,11 +53,10 @@ class RiseWebApi {
     return response;
   }
 
-  String getNodeAddress() => _dio.options.baseUrl;
+  String getNodeAddress() => nodeAddress;
 
   void setNodeAddress(String url) {
-    var path = url.endsWith('/') ? url : url + '/';
-    _dio.options.baseUrl =
-        path.endsWith('/$_PATH_SUFFIX/') ? path : path + '$_PATH_SUFFIX/';
+    nodeAddress = url.endsWith('/') ? url : url + '/';
+    _dio.options.baseUrl = nodeAddress + '$_PATH_SUFFIX/';
   }
 }
