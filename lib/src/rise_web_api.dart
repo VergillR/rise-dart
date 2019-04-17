@@ -27,7 +27,7 @@ class RiseWebApi {
   RiseWebApi() {
     nodeAddress = nodeAddress.endsWith('/') ? nodeAddress : nodeAddress + '/';
     _dio.options.baseUrl = nodeAddress + '$_PATH_SUFFIX/';
-    _dio.options.connectTimeout = 4000;
+    _dio.options.connectTimeout = 8000;
     _dio.options.contentType = ContentType.json;
     this.accounts = Accounts(callback);
     this.blocks = Blocks(callback);
