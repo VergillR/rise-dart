@@ -44,13 +44,17 @@ class RiseWebApi {
       String path = '/',
       Map<String, dynamic> data,
       Map<String, dynamic> queryParameters}) async {
-    var response = await _dio.request(
-      path,
-      data: data,
-      queryParameters: queryParameters,
-      options: Options(method: method),
-    );
-    return response;
+    try {
+      var response = await _dio.request(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: Options(method: method),
+      );
+      return response;
+    } catch (e) {
+      return e.response;
+    }
   }
 
   String getNodeAddress() => nodeAddress;
