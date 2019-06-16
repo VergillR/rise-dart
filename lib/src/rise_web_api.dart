@@ -29,6 +29,8 @@ class RiseWebApi {
     _dio.options.baseUrl = nodeAddress + '$_PATH_SUFFIX/';
     _dio.options.connectTimeout = 8000;
     _dio.options.contentType = ContentType.json;
+    _dio.interceptors
+        .add(InterceptorsWrapper(onError: (DioError e) => _dio.resolve(e)));
     this.accounts = Accounts(callback);
     this.blocks = Blocks(callback);
     this.delegates = Delegates(callback);
@@ -53,7 +55,7 @@ class RiseWebApi {
       );
       return response;
     } catch (e) {
-      return e.response;
+      throw e;
     }
   }
 
